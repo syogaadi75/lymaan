@@ -1,12 +1,12 @@
-import { yupResolver } from "@hookform/resolvers/yup";
+import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { InputField } from "components/hookform";
-import { useForm } from "react-hook-form";
-import { SlArrowRight } from "react-icons/sl";
-import { ImportButtons, TableModalImport } from "./TableModalImport";
+import {InputField} from "components/hookform";
+import {useForm} from "react-hook-form";
+import {SlArrowRight} from "react-icons/sl";
+import {ImportButtons, TableModalImport} from "./TableModalImport";
 import cx from "classnames";
-import { useDisclosure } from "hooks";
-import { ColumnsType } from "antd/es/table";
+import {useDisclosure} from "hooks";
+import {ColumnsType} from "antd/es/table";
 import {
   ApiListRequest,
   CompanyResponse,
@@ -14,14 +14,15 @@ import {
   MemberType,
   defaultApiListOptions,
 } from "interfaces";
-import { useGetListCompany } from "hooks/query";
-import { useEffect, useState } from "react";
+import {useGetListCompany} from "hooks/query";
+import {useEffect, useState} from "react";
 import Button from "components/ui/buttons/Button";
-import { FaPlus } from "react-icons/fa";
-import { AiOutlineDelete } from "react-icons/ai";
+import {FaPlus} from "react-icons/fa";
+import {AiOutlineDelete} from "react-icons/ai";
 import moment from "moment";
-import { useAtom } from "jotai";
-import { notificationAtom } from "hooks/atom/useAtom";
+import {useAtom} from "jotai";
+import {notificationAtom} from "hooks/atom/useAtom";
+import {AnyObject, Maybe} from "yup/lib/types";
 
 interface DataSourceTable extends InsurerData {
   key: React.Key;
@@ -83,9 +84,7 @@ const formSchema: yup.SchemaOf<{
   //   .string()
   //   .url()
   //   .required("Company Website is a required field!"),
-  leaderShare: yup
-    .number()
-    .required("Leader Share is a required field!"),
+  leaderShare: yup.number().required("Leader Share is a required field!"),
 });
 
 const formSchemaMember: yup.SchemaOf<{
@@ -100,11 +99,8 @@ const formSchemaMember: yup.SchemaOf<{
     .string()
     .email()
     .required("Member Email Address is a required field!"),
-  memberShare: yup
-    .number()
-    .required("Member Share is a required field!"),
+  memberShare: yup.number().required("Member Share is a required field!"),
 });
-
 
 const GeneralDatabaseTab = ({
   company,
@@ -130,54 +126,90 @@ const GeneralDatabaseTab = ({
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: {errors},
     reset,
     watch,
-  } = useForm({ resolver: yupResolver(formSchema) });
+  } = useForm({resolver: yupResolver(formSchema)});
 
   const {
     register: registerMember,
     handleSubmit: handleSubmitMember,
-    formState: { errors: errorsMember },
+    formState: {errors: errorsMember},
     reset: resetMember,
     watch: watchMember,
-  } = useForm({ resolver: yupResolver(formSchemaMember) });
+  } = useForm({resolver: yupResolver(formSchemaMember)});
 
   const [notificationMsg, setNotificationMsg] = useAtom(notificationAtom);
 
-  const leaderShareValue = watch('leaderShare');
-  const memberShareValue = watchMember('memberShare');
-  const [globalCompany, setGlobalCompany] = useState({})
+  const leaderShareValue = watch("leaderShare") as unknown as number;
+
+  const memberShareValue = watchMember("memberShare") as unknown as number;
+  const [globalCompany, setGlobalCompany] = useState({
+    id: 0,
+    created_at: "",
+    share: 0,
+    name: "",
+    address: "",
+    contact: "",
+    phone: "",
+    email: "",
+    person_incharge: "",
+    website: "",
+  });
   const [isNol, setIsNol] = useState(false);
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { isOpen: isOpenMember, onOpen: onOpenMember, onClose: onCloseMember } = useDisclosure();
+  const {isOpen, onOpen, onClose} = useDisclosure();
+  const {
+    isOpen: isOpenMember,
+    onOpen: onOpenMember,
+    onClose: onCloseMember,
+  } = useDisclosure();
 
   const [listOption, setListOption] = useState<ApiListRequest>(
     defaultApiListOptions,
   );
 
-  const { data, isLoading } = useGetListCompany(listOption);
+  const {data, isLoading} = useGetListCompany(listOption);
 
   const changeShare = () => {
-    let newGlobalCompany = { ...globalCompany, share: leaderShareValue };
+    let newGlobalCompany = {
+      ...globalCompany,
+      share: Number(leaderShareValue) || 0,
+    };
     setGlobalCompany(newGlobalCompany);
     setCompany(newGlobalCompany);
   };
 
   const changeMemberShare = () => {
+    console.log(members, "members");
+    console.log(Number(memberShareValue), "memberShareValue");
     const updatedMembers = members.map((member, _index) =>
-      _index === index ? { ...member, share: memberShareValue } : member
+      _index === index
+        ? {
+            id: member.id,
+            name: member.name,
+            address: member.address,
+            email: member.email,
+            share: Number(memberShareValue),
+          }
+        : {
+            id: member.id,
+            name: member.name,
+            address: member.address,
+            email: member.email,
+            share: Number(member.share),
+          },
     );
+    console.log(updatedMembers, "updatedMembers");
     setMembers(updatedMembers);
   };
 
   const addMember = () => {
     const member: MemberType = {
       id: 0,
-      name: '',
-      address: '',
-      email: '',
+      name: "",
+      address: "",
+      email: "",
       share: 0,
     };
     setMembers([...members, member]);
@@ -202,9 +234,7 @@ const GeneralDatabaseTab = ({
   const onImportMember = (member: InsurerData) => {
     member.share = 0;
     setMembers(
-      members?.map((_member, _index) =>
-        _index == index ? member : _member,
-      ),
+      members?.map((_member, _index) => (_index == index ? member : _member)),
     );
 
     resetMember({
@@ -221,7 +251,7 @@ const GeneralDatabaseTab = ({
         memberName: members[index].name,
         memberAddress: members[index].address,
         memberEmailAddress: members[index].email,
-        memberShare: members[index].share,
+        memberShare: String(members[index].share),
       });
     } else if (members?.length == 0) {
       addMember();
@@ -234,17 +264,34 @@ const GeneralDatabaseTab = ({
   };
 
   const onImportData = (company: InsurerData) => {
-    let newComp = { ...company, share: leaderShareValue || 0 }
+    console.log(company, "comp");
+    let newComp = {
+      id: company.id,
+      created_at: company.created_at,
+      share: Number(leaderShareValue) || 0,
+    };
 
-    setGlobalCompany(newComp);
-    setCompany(newComp);
+    let newGlobalCompany = {
+      id: company.id,
+      created_at: company.created_at,
+      share: Number(leaderShareValue) || 0,
+      name: company.name,
+      address: company.address,
+      contact: company.contact,
+      phone: company.phone,
+      email: company.email,
+      person_incharge: company.person_incharge,
+      website: company.website,
+    };
+
+    setGlobalCompany(newGlobalCompany);
+    setCompany(newGlobalCompany);
     reset({
       companyName: company.name,
       companyAddress: company.address,
       // companyContact: company.contact,
       // companyPersonInCharge: company.person_incharge,
       companyEmailAddress: company.email,
-      leaderShare: company.share,
       // companyPhoneNumber: company.phone,
       // companyWebsite: company.website,
     });
@@ -281,7 +328,7 @@ const GeneralDatabaseTab = ({
   }, [company]);
 
   useEffect(() => {
-    let complete = parseInt(leaderShareValue) || 0;
+    let complete = Number(leaderShareValue) || 0;
     let tanpaMember = true;
     if (complete === 100) {
       setIsNol(false);
@@ -293,21 +340,18 @@ const GeneralDatabaseTab = ({
         notificationDescription: "Leader Share tidak boleh lebih dari 100%",
       });
 
-      let newGlobalCompany = { ...globalCompany, share: 0 };
+      let newGlobalCompany = {...globalCompany, share: 0};
       setGlobalCompany(newGlobalCompany);
       setCompany(newGlobalCompany);
-      reset({
-        leaderShare: 0
-      })
       setCompanyComplete(0);
     } else {
       setIsNol(true);
       tanpaMember = false;
-      members.forEach(member => {
+      members.forEach((member) => {
         if (member.share) {
-          complete += parseInt(member.share) || 0
+          complete += member.share || 0;
         }
-      })
+      });
 
       if (complete === 100) {
         setCompanyComplete(1);
@@ -316,15 +360,16 @@ const GeneralDatabaseTab = ({
         setNotificationMsg({
           notificationType: "error",
           notificationTitle: "Error Input!",
-          notificationDescription: "Leader Share + Member Share tidak boleh lebih dari 100%",
+          notificationDescription:
+            "Leader Share + Member Share tidak boleh lebih dari 100%",
         });
         const updatedMembers = members.map((member, _index) =>
-          _index === index ? { ...member, share: 0 } : member
+          _index === index ? {...member, share: 0} : member,
         );
         setMembers(updatedMembers);
         resetMember({
-          memberShare: 0
-        })
+          memberShare: "0",
+        });
       } else {
         setCompanyComplete(0);
       }
@@ -332,15 +377,15 @@ const GeneralDatabaseTab = ({
   }, [leaderShareValue, memberShareValue, members]);
 
   return (
-    <div className={cx({ hidden: !isOpenTab })}>
+    <div className={cx({hidden: !isOpenTab})}>
       <form
         className="pl-7 pr-36 mt-5 flex flex-col"
         onSubmit={handleSubmit(onSubmit)}>
         <div
           className={cx(
             "flex gap-5",
-            { "items-center": errors.companyName },
-            { "items-end": !errors.companyName },
+            {"items-center": errors.companyName},
+            {"items-end": !errors.companyName},
           )}>
           <div className="flex-1">
             <InputField
@@ -356,7 +401,7 @@ const GeneralDatabaseTab = ({
           </div>
           <Button
             size="large"
-            className={cx("mb-4 gap-2", { "mt-2": errors.companyName })}
+            className={cx("mb-4 gap-2", {"mt-2": errors.companyName})}
             onClick={() => onOpen()}>
             Import from Database <SlArrowRight size={14} color="white" />
           </Button>
@@ -438,109 +483,112 @@ const GeneralDatabaseTab = ({
         />
       </form>
 
-      {
-        (isNol && leaderShareValue > 0) ? (
-          <div>
-            <div className="flex pl-7 pr-36 mt-5 gap-3 justify-end">
-              {
-                companyComplete === 1 ? '' : (
-                  <>
-                    <Button icon={<FaPlus size={16} />} onClick={addMember} size="large">
-                      Add Member
-                    </Button>
-                    <Button
-                      icon={<AiOutlineDelete />}
-                      size="large"
-                      color="danger"
-                      disabled={members?.length == 1}
-                      onClick={deleteMember}>
-                      Delete
-                    </Button>
-                  </>
-                )
-              }
-            </div>
-            <form
-              className="pl-7 pr-36 mt-5 flex flex-col"
-              onSubmit={handleSubmit(onSubmit)}>
-              <div
-                className={cx(
-                  "flex gap-5",
-                  { "items-center": errorsMember.memberName },
-                  { "items-end": !errorsMember.memberName },
-                )}>
+      {isNol && Number(leaderShareValue) > 0 ? (
+        <div>
+          <div className="flex pl-7 pr-36 mt-5 gap-3 justify-end">
+            {companyComplete === 1 ? (
+              ""
+            ) : (
+              <>
                 <Button
-                  size="large"
-                  className={cx("mb-4 gap-2", { "mt-2": errorsMember.memberName })}
-                  onClick={() => onOpenMember()}>
-                  Import from Database <SlArrowRight size={14} color="white" />
+                  icon={<FaPlus size={16} />}
+                  onClick={addMember}
+                  size="large">
+                  Add Member
                 </Button>
-              </div>
-              <InputField
-                name="memberName"
-                label="Member Name"
-                labelclassName="font-medium"
-                placeholder="Enter Name"
-                errors={errorsMember}
-                isRequired={true}
-                register={registerMember}
-                disabled
-              />
-              <InputField
-                name="memberAddress"
-                label="Member Address"
-                labelclassName="font-medium"
-                placeholder="Enter address"
-                errors={errorsMember}
-                isRequired={true}
-                register={registerMember}
-                disabled
-              />
-              <InputField
-                type="email"
-                name="memberEmailAddress"
-                label="Member Email Address"
-                labelclassName="font-medium"
-                placeholder="Enter email address"
-                errors={errorsMember}
-                isRequired={true}
-                register={registerMember}
-                disabled
-              />
-              <InputField
-                type="number"
-                name="memberShare"
-                label="Member Share (1-100%)"
-                labelclassName="font-medium"
-                placeholder="Enter Member Share"
-                errors={errorsMember}
-                isRequired={true}
-                register={registerMember}
-                onKeyUp={changeMemberShare}
-              />
-            </form>
-
-            <TableModalImport
-              title="Import Company Database"
-              onClose={onCloseMember}
-              isOpen={isOpenMember}
-              {...{ columns, dataSource: dataSourceMember, isLoading }}
-              onChangeSearch={(value: string) =>
-                setListOption({
-                  page: 1,
-                  search: value,
-                  per_page: listOption.per_page,
-                })
-              }
-            />
+                <Button
+                  icon={<AiOutlineDelete />}
+                  size="large"
+                  color="danger"
+                  disabled={members?.length == 1}
+                  onClick={deleteMember}>
+                  Delete
+                </Button>
+              </>
+            )}
           </div>
-        ) : ''
-      }
+          <form
+            className="pl-7 pr-36 mt-5 flex flex-col"
+            onSubmit={handleSubmit(onSubmit)}>
+            <div
+              className={cx(
+                "flex gap-5",
+                {"items-center": errorsMember.memberName},
+                {"items-end": !errorsMember.memberName},
+              )}>
+              <Button
+                size="large"
+                className={cx("mb-4 gap-2", {"mt-2": errorsMember.memberName})}
+                onClick={() => onOpenMember()}>
+                Import from Database <SlArrowRight size={14} color="white" />
+              </Button>
+            </div>
+            <InputField
+              name="memberName"
+              label="Member Name"
+              labelclassName="font-medium"
+              placeholder="Enter Name"
+              errors={errorsMember}
+              isRequired={true}
+              register={registerMember}
+              disabled
+            />
+            <InputField
+              name="memberAddress"
+              label="Member Address"
+              labelclassName="font-medium"
+              placeholder="Enter address"
+              errors={errorsMember}
+              isRequired={true}
+              register={registerMember}
+              disabled
+            />
+            <InputField
+              type="email"
+              name="memberEmailAddress"
+              label="Member Email Address"
+              labelclassName="font-medium"
+              placeholder="Enter email address"
+              errors={errorsMember}
+              isRequired={true}
+              register={registerMember}
+              disabled
+            />
+            <InputField
+              type="number"
+              name="memberShare"
+              label="Member Share (1-100%)"
+              labelclassName="font-medium"
+              placeholder="Enter Member Share"
+              errors={errorsMember}
+              isRequired={true}
+              register={registerMember}
+              onKeyUp={changeMemberShare}
+            />
+          </form>
+
+          <TableModalImport
+            title="Import Company Database"
+            onClose={onCloseMember}
+            isOpen={isOpenMember}
+            {...{columns, dataSource: dataSourceMember, isLoading}}
+            onChangeSearch={(value: string) =>
+              setListOption({
+                page: 1,
+                search: value,
+                per_page: listOption.per_page,
+              })
+            }
+          />
+        </div>
+      ) : (
+        ""
+      )}
       <TableModalImport
         title="Import Company Database"
         onClose={onClose}
         isOpen={isOpen}
-        {...{ columns, dataSource, isLoading }}
+        {...{columns, dataSource, isLoading}}
         onChangeSearch={(value: string) =>
           setListOption({
             page: 1,
