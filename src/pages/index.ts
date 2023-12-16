@@ -1,0 +1,10 @@
+export {default as LoginPage} from "./Login";
+export {default as NotFoundPage} from "./NotFound";
+export {default as DashboardPage} from "./Dashboard";
+export {default as ProfilePage} from "./Profile";
+export {default as UsersPage} from "./Users";
+export {default as InstructionPage} from "./Instruction";
+export {default as RolePage} from "./Role";
+export {default as SubmittedListPage} from "./Submitted";
+export {default as Payment} from "./Payment";
+export {default as Statistic} from "./Statistic";

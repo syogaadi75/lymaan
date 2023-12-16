@@ -1,0 +1,10 @@
+/* Compatibility for modern javascript or typescript syntax
+  support for all browser including old browser */
+
+{
+  "presets": [
+    "@babel/preset-env",
+    ["@babel/preset-react", {"runtime": "automatic"}],
+    "@babel/preset-typescript"
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "no": 1,
+      "name": "Anggita Salsa",
+      "company": {
+        "name": "PT. INDRAMAYU JAYA",
+        "address": "Jl. RS Islam Faisal Raya No. 10, South Sulawesi, 90222."
+      },
+      "phone": "081234567890",
+      "affiliation": "Affiliasi Mutual Liberty",
+      "created_date": "2023-08-30T06:09:23.000Z"
+    },
+    {
+      "id": 1,
+      "no": 2,
+      "name": "Farah Nabila",
+      "company": {
+        "name": "PT. MAJU BERSAMA",
+        "address": "Jl. RS Islam Faisal Raya No. 10, South Sulawesi, 90222."
+      },
+      "phone": "081234567890",
+      "affiliation": "Affiliasi Mutual Liberty",
+      "created_date": "2023-08-30T06:09:23.000Z"
+    },
+    {
+      "id": 2,
+      "no": 3,
+      "name": "Fuji Astuti",
+      "phone": "081234567890",
+      "company": {
+        "name": "PT. PHAPROS",
+        "address": "Jl. RS Islam Faisal Raya No. 10, South Sulawesi, 90222."
+      },
+      "affiliation": "Affiliasi Mutual Liberty",
+      "created_date": "2023-08-30T06:09:23.000Z"
+    },
+    {
+      "id": 3,
+      "no": 4,
+      "name": "Roberto Fimino",
+      "company": {
+        "name": "CV. DNS TECHNOLOGY",
+        "address": "Jl. RS Islam Faisal Raya No. 10, South Sulawesi, 90222."
+      },
+      "phone": "081234567890",
+      "affiliation": "Affiliasi Mutual Liberty",
+      "created_date": "2023-08-30T06:09:23.000Z"
+    },
+    {
+      "id": 4,
+      "no": 5,
+      "name": "Darwin Nunez",
+      "company": {
+        "name": "PT. INDRAMAYU JAYA",
+        "address": "Jl. RS Islam Faisal Raya No. 10, South Sulawesi, 90222."
+      },
+      "phone": "081234567890",
+      "affiliation": "Affiliasi Mutual Liberty",
+      "created_date": "2023-08-30T06:09:23.000Z"
+    },
+    {
+      "id": 5,
+      "no": 6,
+      "name": "Erlin Haland",
+      "company": {
+        "name": "PT. MAJU BERSAMA",
+        "address": "Jl. RS Islam Faisal Raya No. 10, South Sulawesi, 90222."
+      },
+      "phone": "081234567890",
+      "affiliation": "Affiliasi Mutual Liberty",
+      "created_date": "2023-08-30T06:09:23.000Z"
+    },
+    {
+      "id": 6,
+      "no": 7,
+      "name": "Frago Santoso",
+      "company": {
+        "name": "PT. PHAPROS",
+        "address": "Jl. RS Islam Faisal Raya No. 10, South Sulawesi, 90222."
+      },
+      "phone": "081234567890",
+      "affiliation": "Affiliasi Mutual Liberty",
+      "created_date": "2023-08-30T06:09:23.000Z"
+    },
+    {
+      "id": 7,
+      "no": 8,
+      "name": "Takumi Minamino",
+      "company": {
+        "name": "CV. DNS TECHNOLOGY",
+        "address": "Jl. RS Islam Faisal Raya No. 10, South Sulawesi, 90222."
+      },
+      "phone": "081234567890",
+      "affiliation": "Affiliasi Mutual Liberty",
+      "created_date": "2023-08-30T06:09:23.000Z"
+    },
+    {
+      "id": 8,
+      "no": 9,
+      "name": "Allison Baker",
+      "company": {
+        "name": "CV. DNS TECHNOLOGY",
+        "address": "Jl. RS Islam Faisal Raya No. 10, South Sulawesi, 90222."
+      },
+      "phone": "081234567890",
+      "affiliation": "Affiliasi Mutual Liberty",
+      "created_date": "2023-08-30T06:09:23.000Z"
+    },
+    {
+      "id": 9,
+      "no": 10,
+      "name": "Angga Anugerah",
+      "company": {
+        "name": "CV. DNS TECHNOLOGY",
+        "address": "Jl. RS Islam Faisal Raya No. 10, South Sulawesi, 90222."
+      },
+      "phone": "081234567890",
+      "affiliation": "Affiliasi Mutual Liberty",
+      "created_date": "2023-08-30T06:09:23.000Z"
+    }
+  ]
+}

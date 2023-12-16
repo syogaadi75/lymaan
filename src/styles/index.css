@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins" !important;
+}
+
+label {
+  width: 100%;
+}
+
+body {
+  background-color: #ffff;
+}
+
+div.ant-upload,
+div.ant-upload-list,
+div.ant-upload-list-item-container {
+  width: 100% !important;
+  height: 100% !important;
+  border-color: #98afc9 !important;
+  transition: none !important;
+}
+
+.ant-pagination {
+  display: flex;
+}
+
+.ant-pagination-total-text {
+  margin-right: auto !important;
+}
+
+.ant-pagination-options {
+  margin-left: auto !important;
+}
+
+.notification-dropdown {
+  max-height: 500px;
+  overflow-y: auto;
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "id": 0,
+    "no": 1,
+    "name": "Bambang Purnomo",
+    "address": "Jl. RS Islam Faisal Raya III No. 14",
+    "email": "bambangprnm@gmail.com",
+    "phone": "081234567890",
+    "join_date": "17 September 2020"
+  },
+  {
+    "id": 1,
+    "no": 2,
+    "name": "Indah Dwi",
+    "address": "Jl. RS Islam Faisal Raya III No. 14",
+    "email": "indahdwi@gmail.com",
+    "phone": "081234567890",
+    "join_date": "17 September 2020"
+  },
+  {
+    "id": 2,
+    "no": 3,
+    "name": "Fragos Gos",
+    "address": "Jl. RS Islam Faisal Raya III No. 14",
+    "email": "fragos12@gmail.com",
+    "phone": "081234567890",
+    "join_date": "17 September 2020"
+  },
+  {
+    "id": 3,
+    "no": 4,
+    "name": "Takumi Yui",
+    "address": "Jl. RS Islam Faisal Raya III No. 14",
+    "email": "takumiyui76@gmail.com",
+    "phone": "081234567890",
+    "join_date": "17 September 2020"
+  },
+  {
+    "id": 4,
+    "no": 5,
+    "name": "Nanda Anggi",
+    "address": "Jl. RS Islam Faisal Raya III No. 14",
+    "email": "nanda987@gmail.com",
+    "phone": "081234567890",
+    "join_date": "17 September 2020"
+  },
+  {
+    "id": 5,
+    "no": 6,
+    "name": "Ahmad Junaidi",
+    "address": "Jl. RS Islam Faisal Raya III No. 14",
+    "email": "ahmadjunaidi@gmail.com",
+    "phone": "081234567890",
+    "join_date": "17 September 2020"
+  },
+  {
+    "id": 6,
+    "no": 7,
+    "name": "Santoso Santa",
+    "address": "Jl. RS Islam Faisal Raya III No. 14",
+    "email": "santoso09@gmail.com",
+    "phone": "081234567890",
+    "join_date": "17 September 2020"
+  },
+  {
+    "id": 7,
+    "no": 8,
+    "name": "Dwi Putri",
+    "address": "Jl. RS Islam Faisal Raya III No. 14",
+    "email": "putridwi@gmail.com",
+    "phone": "081234567890",
+    "join_date": "17 September 2020"
+  },
+  {
+    "id": 8,
+    "no": 9,
+    "name": "Annisa Putri",
+    "address": "Jl. RS Islam Faisal Raya III No. 14",
+    "email": "annisaputri@gmail.com",
+    "phone": "081234567890",
+    "join_date": "17 September 2020"
+  },
+  {
+    "id": 9,
+    "no": 10,
+    "name": "Putra Ridwan",
+    "address": "Jl. RS Islam Faisal Raya III No. 14",
+    "email": "putraridwan@gmail.com",
+    "phone": "081234567890",
+    "join_date": "17 September 2020"
+  }
+]
